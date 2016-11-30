@@ -1,5 +1,5 @@
-# pp-fee-calculator
-PayPal fee calculator
+# PayPal fee calculator
+
 
 
 <a href="https://hackforums.net/member.php?action=profile&amp;uid=1866423">HF member</a> created the calc.Py file.
