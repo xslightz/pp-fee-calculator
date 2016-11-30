@@ -1,12 +1,13 @@
 """
 Sales within the US
-    2.9% + $0.30 per transaction Discounted
-rate for eligible nonprofits
+    2.9% + $0.30 per transaction
+Discounted rate for eligible nonprofits
     2.2% + $0.30 per transaction
 International sales
     3.9% transaction fee plus a fixed fee based on currency received
 PayPal HereTM card reader
     2.7% when you swipe a card or 3.5% plus $0.15 for manually entered transactions
+
 
 * https://www.paypal.com/us/webapps/mpp/paypal-fees
 * Fixed fee $0.30 per sale
@@ -37,6 +38,7 @@ PayPalHereTMcardreaderSWIPE = lambda x: ((x * 0.027)) + x
 PayPalHereTMcardreaderMANUAL = lambda x: ((x * 0.035) + 0.15) + x
 calculate = ""
 
+
 while True:
     try:
         print(panel())
@@ -50,7 +52,7 @@ while True:
         elif option == "4":
             calculate = PayPalHereTMcardreaderSWIPE
         elif option == "5":
-            calculate = PayPalHereTMcardreaderMANUAL
+            calculate == PayPalHereTMcardreaderMANUAL
         else:
             print("\nThis option is not exists, please try again.")
             continue
