@@ -52,7 +52,7 @@ while True:
         elif option == "4":
             calculate = PayPalHereTMcardreaderSWIPE
         elif option == "5":
-            calculate == PayPalHereTMcardreaderMANUAL
+            calculate = PayPalHereTMcardreaderMANUAL
         else:
             print("\nThis option is not exists, please try again.")
             continue
