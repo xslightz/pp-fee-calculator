@@ -48,6 +48,8 @@ class Ui_Dialog(object):
         self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+
+        # BEGIN RADIO BUTTONS
         self.radioButton1 = QtGui.QRadioButton(self.layoutWidget)
         self.radioButton1.setChecked(True)
         self.radioButton1.setObjectName(_fromUtf8("radioButton1"))
@@ -65,6 +67,16 @@ class Ui_Dialog(object):
         self.radioButton5.setMaximumSize(QtCore.QSize(16777215, 20))
         self.radioButton5.setObjectName(_fromUtf8("radioButton5"))
         self.verticalLayout.addWidget(self.radioButton5)
+
+        buttons = [getattr(self, "radioButton{}".format(i + 1), None) for i in range(5)]
+
+        self.radioButtonGroup = QtGui.QButtonGroup()
+
+        for i, button in enumerate(buttons):
+            self.radioButtonGroup.addButton(button, i + 1)
+
+        # END RADIO BUTTONS
+
         self.verticalLayout_4.addWidget(self.groupBox)
         self.horizontalLayout_4 = QtGui.QHBoxLayout()
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))

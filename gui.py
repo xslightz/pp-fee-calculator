@@ -13,39 +13,40 @@ class MyDialog(QtGui.QDialog):
         self.ui.calcButton.clicked.connect(self.start)
 
     def start(self):
-        x = self.ui.Amount.text()
+        amount = self.ui.Amount.text()
         try:
-            x = int(x)
-        except Exception:
+            amount = float(amount)  # convert to a float
+        except ValueError as e:
             QtGui.QMessageBox.about(self, 'Error', 'Input can only be a number')
-            pass
+            # print(e)  # optional, only for verbosity
+            return
 
+        # Define the different functions for calculation
         SaleswithintheUS = lambda x: ((x * 0.029) + 0.30) + x
         Discountedrateforeligiblenonprofits = lambda x: ((x * 0.022) + 0.30) + x
         Internationalsales = lambda x: ((x * 0.039) + 0.30) + x
         PayPalHereTMcardreaderSWIPE = lambda x: ((x * 0.027)) + x
         PayPalHereTMcardreaderMANUAL = lambda x: ((x * 0.035) + 0.15) + x
-        calculate = ""
 
-        if self.ui.radioButton1.isChecked():
-            calculate = SaleswithintheUS
-        elif self.ui.radioButton2.isChecked():
-            calculate = Discountedrateforeligiblenonprofits
-        elif self.ui.radioButton3.isChecked():
-            calculate = Internationalsales
-        elif self.ui.radioButton4.isChecked():
-            calculate = PayPalHereTMcardreaderSWIPE
-        elif self.ui.radioButton5.isChecked():
-            calculate = PayPalHereTMcardreaderMANUAL
+        options = {
+            self.ui.radioButton1: SaleswithintheUS,
+            self.ui.radioButton2: Discountedrateforeligiblenonprofits,
+            self.ui.radioButton3: Internationalsales,
+            self.ui.radioButton4: PayPalHereTMcardreaderSWIPE,
+            self.ui.radioButton5: PayPalHereTMcardreaderMANUAL,
+        }
 
-        total = calculate(int(x))
-        fee = total - int(x)
-        self.ui.Total.setText(format(total))
-        self.ui.Fee.setText(format(fee))
+        calculate = options.get(self.ui.radioButtonGroup.checkedButton(), lambda x: x)  # get the calculation formula
+        total = calculate(amount)  # don't use ints, use floats!
+        fee = total - amount
+
+        def prec_format(val, prec=2):  # this will return a formatted float value with a desired precision
+            return "{:.{precision}f}".format(float(val), precision=prec)
+
+        self.ui.Total.setText(prec_format(total))
+        self.ui.Fee.setText(prec_format(fee))
+
         print("\nTotal amount : {0} Fee : {1}".format(total, fee))
-        # print self.ui.Amount.text()
-        # lol = ((x * 0.029) + 0.30) + x
-        # print calculate(int(x))
 
 
 if __name__ == "__main__":
